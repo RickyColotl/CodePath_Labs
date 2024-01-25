@@ -11,6 +11,7 @@ import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
     var counter = 0;
+    var increment = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -18,22 +19,18 @@ class MainActivity : AppCompatActivity() {
         val upgradeButton = findViewById<Button>(R.id.upgradeBtn)
         val textView = findViewById<TextView>(R.id.num)
         button.setOnClickListener{
-            //Toast.makeText(it.context, "Clicked Button!", Toast.LENGTH_SHORT).show()
-            counter++
-            textView.text = counter.toString()
-
-            if(counter >= 100 ){
+            //code for counter and if condition for == 100 inside if upgrade increment
+            counter += increment
+            if (counter >= 100 && increment == 1){
                 upgradeButton.visibility = View.VISIBLE
-                upgradeButton.setOnClickListener{
-                    upgradeButton.text = "Add 2"
-
-                    button.setOnClickListener{
-                        counter += 2
-                        textView.text = counter.toString()
-                    }
-                    upgradeButton.visibility = View.INVISIBLE
-                }
             }
+            textView.text = counter.toString()
+        }
+
+        upgradeButton.setOnClickListener {
+            upgradeButton.text = "Add 2"
+            increment += 1
+            upgradeButton.visibility = View.INVISIBLE
         }
     }
 }
